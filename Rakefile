@@ -30,11 +30,12 @@ namespace :rbs do
 
   desc "Run Steep type checker"
   task :steep do
-    sh "bundle exec steep check --severity-level=warning" do |ok, _res|
+    sh "bundle exec steep check --severity-level=error" do |ok, _res|
       if ok
         puts "✓ Steep type checking passed"
       else
-        puts "⚠ Steep found type warnings (not failing build)"
+        puts "✗ Steep found type errors"
+        exit 1
       end
     end
   end

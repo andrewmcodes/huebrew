@@ -28,7 +28,7 @@ module Huebrew
     # @param family [String] Family name to export
     # @param dest [String, nil] Destination path (for file/dir exporters)
     # @return [String, nil] Rendered output (for string exporters) or path (for file/dir exporters)
-    def render(palette:, family:, dest: nil)
+    def render(palette:, family: nil, dest: nil)
       raise NotImplementedError, "Subclass must implement #render"
     end
 

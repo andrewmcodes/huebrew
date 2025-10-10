@@ -1,3 +1,64 @@
+module Dry
+  def self.Types: () -> untyped
+
+  module CLI
+    class Command
+      def self.desc: (String description) -> void
+
+      def self.argument: (Symbol name, ?type: Symbol, ?required: bool, ?desc: String) -> void
+
+      def self.option: (Symbol name, ?type: Symbol, ?required: bool, ?desc: String, ?aliases: Array[String], ?default: untyped) -> void
+
+      def initialize: () -> void
+    end
+
+    module Registry
+      def register: (String name, untyped command, ?aliases: Array[String]) -> void
+    end
+
+    def self.new: (untyped registry) -> instance
+
+    def call: (?arguments: Array[String]) -> void
+  end
+
+  module Types
+  end
+
+  module Configurable
+    def setting: (Symbol name, ?default: untyped) -> void
+  end
+
+  class Struct
+    def self.attribute: (Symbol name, untyped type_def) -> void
+
+    def self.new: (**untyped) -> instance
+  end
+end
+
+class String
+  def to_i: (?Integer base) -> Integer
+end
+
+module JSON
+  def self.pretty_generate: (untyped obj) -> String
+end
+
+module FileUtils
+  def self.mkdir_p: (String path) -> void
+end
+
+class Hash[unchecked out K, unchecked out V]
+  def to_yaml: () -> String
+end
+
+class File
+  def self.expand_path: (String | nil path, ?String | nil dir) -> String
+end
+
+class Dir
+  def self.exist?: (String | nil path) -> bool
+end
+
 module Huebrew
   VERSION: String
 
@@ -32,11 +93,15 @@ module Huebrew
   module Types
   end
 
-  class Color
+  class Color < Dry::Struct
     attr_reader r: Integer
     attr_reader g: Integer
     attr_reader b: Integer
     attr_reader a: Float
+
+    def self.new: (r: Integer, g: Integer, b: Integer, ?a: Float) -> Color
+
+    def new: (**untyped) -> Color
 
     def self.parse: (String hex) -> Color
 
@@ -57,7 +122,7 @@ module Huebrew
     def to_s: () -> String
   end
 
-  class Palette
+  class Palette < Dry::Struct
     attr_reader id: String
     attr_reader name: String
     attr_reader scheme: String
@@ -65,6 +130,8 @@ module Huebrew
 
     ROLE_STEP_MAP: Hash[String, Integer]
     SEMANTIC_ALIASES: Hash[String, String]
+
+    def self.new: (id: String, name: String, scheme: String, families: Hash[String, Hash[String, untyped]]) -> Palette
 
     def self.load_from_file: (String path) -> Palette
 
@@ -85,14 +152,20 @@ module Huebrew
     def palettes: () -> Array[Palette]
 
     def find_palettes: (?family: String?, ?scheme: String?) -> Array[Palette]
+
+    private
+
+    def default_data_dirs: () -> Array[String]
   end
 
-  class Variant
+  class Variant < Dry::Struct
     attr_reader id: String
     attr_reader name: String
     attr_reader rules: Array[Hash[Symbol, untyped]]
 
     VARIANTS: Hash[String, Hash[Symbol, untyped]]
+
+    def self.new: (id: String, name: String, rules: Array[Hash[Symbol, untyped]]) -> Variant
 
     def self.get: (String id) -> Variant?
 
@@ -115,9 +188,15 @@ module Huebrew
     def color: (String path) -> Color?
 
     def tokens_for_family: (String family) -> Hash[String, Color]
+
+    private
+
+    def apply_variant_rules: (Hash[String, Color] tokens) -> Hash[String, Color]
   end
 
   class Config
+    extend Dry::Configurable
+
     def self.config: () -> untyped
 
     def self.load_from_file: (String path) -> void
@@ -125,6 +204,14 @@ module Huebrew
     def self.load_from_env: () -> void
 
     def self.initialize_config: () -> void
+
+    private
+
+    def self.user_huebrew_dir: () -> String
+
+    def self.default_data_dir: () -> Array[String]
+
+    def self.default_templates_dir: () -> Array[String]
   end
 
   class Exporter
@@ -136,7 +223,7 @@ module Huebrew
 
     def capabilities: () -> Hash[Symbol, bool]
 
-    def render: (palette: Palette, family: String, ?dest: String?) -> String?
+    def render: (palette: Palette, ?family: String?, ?dest: String?) -> String?
 
     def format_color: (Color color, ?bg: Color?) -> String
   end
@@ -156,33 +243,66 @@ module Huebrew
   end
 
   module CLI
-    class Command
+    class Command < Dry::CLI::Command
+      def initialize: () -> void
+
       def call: (**untyped) -> void
+
+      def exit_code_for: (StandardError error) -> Integer
+
+      def handle_error: (StandardError error) -> void
     end
 
+    def self.run: (?Array[String] arguments) -> void
+
     module Commands
+      extend Dry::CLI::Registry
       class Version < Command
         def call: (**untyped) -> void
       end
 
       class Init < Command
         def call: (**untyped) -> void
+
+        private
+
+        def create_dir: (String path) -> void
+
+        def create_sample_config: (String path) -> void
       end
 
       class List < Command
-        def call: (**untyped) -> void
+        def call: (?type: String, **untyped) -> void
+
+        private
+
+        def list_palettes: () -> void
+
+        def list_variants: () -> void
+
+        def list_exporters: () -> void
       end
 
       class Preview < Command
-        def call: (**untyped) -> void
+        def call: (?palette_id: String?, ?family: String?, **untyped) -> void
+
+        private
+
+        def display_palette: (Palette palette, String family_name) -> void
+
+        def display_color: (untyped step, String role, Color color) -> void
       end
 
       class Build < Command
-        def call: (**untyped) -> void
+        def call: (?palette_id: String?, ?variant: String?, ?format: String, ?family: String?, **untyped) -> void
       end
 
       class Export < Command
-        def call: (**untyped) -> void
+        def call: (target: String, ?palette_id: String?, ?family: String?, ?output: String?, **untyped) -> void
+
+        private
+
+        def get_exporter: (String target) -> Exporter?
       end
     end
   end
@@ -192,7 +312,7 @@ module Huebrew
       class V1 < Exporter
         def capabilities: () -> Hash[Symbol, bool]
 
-        def render: (palette: Palette, family: String, ?dest: String?) -> String
+        def render: (palette: Palette, ?family: String?, ?dest: String?) -> String
 
         def output_kind: () -> Symbol
       end
@@ -202,9 +322,13 @@ module Huebrew
       class V1 < Exporter
         def capabilities: () -> Hash[Symbol, bool]
 
-        def render: (palette: Palette, family: String, ?dest: String?) -> String
+        def render: (palette: Palette, ?family: String?, ?dest: String?) -> String
 
         def output_kind: () -> Symbol
+
+        private
+
+        def render_inline: (Palette palette, Hash[String, String] colors, String? dest) -> String
       end
     end
 
@@ -228,7 +352,7 @@ module Huebrew
 
         private
 
-        def ansi_color: (Color color, Color bg) -> Integer
+        def ansi_color: (Color color, Color bg) -> (Integer | Complex)
       end
     end
   end
