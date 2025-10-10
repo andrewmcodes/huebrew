@@ -205,5 +205,19 @@ module Huebrew
         def output_kind: () -> Symbol
       end
     end
+
+    module Eza
+      class V1 < Exporter
+        def capabilities: () -> Hash[Symbol, bool]
+
+        def render: (palette: Palette, ?family: String?, ?dest: String?) -> String
+
+        def output_kind: () -> Symbol
+
+        private
+
+        def ansi_color: (Color color, Color bg) -> Integer
+      end
+    end
   end
 end
