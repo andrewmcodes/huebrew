@@ -28,7 +28,7 @@ module Huebrew
       r = hex[0..1].to_i(16)
       g = hex[2..3].to_i(16)
       b = hex[4..5].to_i(16)
-      a = hex.length == 8 ? hex[6..7].to_i(16) / 255.0 : 1.0
+      a = (hex.length == 8) ? hex[6..7].to_i(16) / 255.0 : 1.0
 
       new(r: r, g: g, b: b, a: a)
     end
@@ -59,11 +59,11 @@ module Huebrew
     # @param bg [Color] Background color
     # @return [Color]
     def blend_over(bg)
-      return self if a == 1.0
+      return self if (a - 1.0).abs < 0.001
 
       # Alpha compositing formula
       out_a = a + bg.a * (1.0 - a)
-      return bg if out_a == 0.0
+      return bg if out_a.abs < 0.001
 
       out_r = ((r * a + bg.r * bg.a * (1.0 - a)) / out_a).round
       out_g = ((g * a + bg.g * bg.a * (1.0 - a)) / out_a).round
@@ -110,19 +110,19 @@ module Huebrew
 
       # Determine strategy if auto
       if strategy == :auto
-        strategy = relative_luminance > bg.relative_luminance ? :lighten : :darken
+        strategy = (relative_luminance > bg.relative_luminance) ? :lighten : :darken
       end
 
       # Adjust color to meet contrast ratio
       adjusted = self
-      step = strategy == :lighten ? 5 : -5
+      step = (strategy == :lighten) ? 5 : -5
 
       50.times do
         break if adjusted.contrast_ratio(bg) >= min_ratio
 
-        new_r = [[adjusted.r + step, 0].max, 255].min
-        new_g = [[adjusted.g + step, 0].max, 255].min
-        new_b = [[adjusted.b + step, 0].max, 255].min
+        new_r = (adjusted.r + step).clamp(0, 255)
+        new_g = (adjusted.g + step).clamp(0, 255)
+        new_b = (adjusted.b + step).clamp(0, 255)
 
         adjusted = Color.new(r: new_r, g: new_g, b: new_b, a: a)
       end

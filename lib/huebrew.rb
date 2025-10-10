@@ -26,4 +26,3 @@ module Huebrew
     @registry ||= Registry.new
   end
 end
-
