@@ -6,4 +6,5 @@ target :lib do
   check "lib"
 
   library "pathname"
+  repo_path ".gem_rbs_collection/"
 end
