@@ -8,13 +8,13 @@ Gem::Specification.new do |spec|
   spec.authors = ["Andrew Mason"]
   spec.email = ["andrewmcodes@protonmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "Centralize Radix v3 color palettes, variants, and exporters"
+  spec.description = "A Ruby gem that provides a CLI to build and export Radix v3 color themes to multiple targets (fzf, VS Code, tmux, Neovim, Raycast)"
   spec.homepage = "https://github.com/andrewmcodes/huebrew"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/andrewmcodes/huebrew"
     spec.metadata["changelog_uri"] = "https://github.com/andrewmcodes/huebrew/blob/main/CHANGELOG.md"
@@ -33,7 +33,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "dry-cli", "~> 1.0"
+  spec.add_dependency "dry-configurable", "~> 1.0"
+  spec.add_dependency "dry-struct", "~> 1.6"
+  spec.add_dependency "dry-types", "~> 1.7"
+
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "aruba", "~> 2.0"
+  spec.add_dependency "simplecov", "~> 0.22"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
