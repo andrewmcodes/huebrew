@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+module Dry
+  module CLI
+    class Command
+      def call: (**untyped) -> void
+      
+      def self.desc: (String description) -> void
+      
+      def self.argument: (Symbol name, **untyped options) -> void
+      
+      def self.option: (Symbol name, **untyped options) -> void
+    end
+
+    def self.register: (String command, Class klass, ?aliases: Array[String]) -> void
+    
+    def self.run: (?Array[String]? argv) -> void
+    
+    def self.new: () -> instance
+  end
+end

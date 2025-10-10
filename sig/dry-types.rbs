@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+module Dry
+  module Types
+    type constraint = ^(untyped) -> bool
+
+    type typ = _Type
+
+    interface _Type
+      def call: (untyped value) -> untyped
+      def []: (untyped value) -> untyped
+      def constrained: (**untyped constraints) -> _Type
+      def enum: (*String values) -> _Type
+    end
+
+    def self.Types: () -> Module
+    def self.[]: (Symbol name) -> _Type
+
+    module Coercions
+      interface _String
+        def call: (untyped) -> String
+      end
+
+      interface _Integer
+        def call: (untyped) -> Integer
+      end
+
+      interface _Float
+        def call: (untyped) -> Float
+      end
+    end
+
+    String: _Type
+    Integer: _Type
+    Float: _Type
+    Bool: _Type
+    Hash: _Type
+    Array: _Type
+  end
+end

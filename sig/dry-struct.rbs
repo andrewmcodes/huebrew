@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+module Dry
+  class Struct
+    def self.attribute: (Symbol name, untyped type, **untyped options) -> void
+    
+    def self.new: (**untyped) -> instance
+  end
+end
