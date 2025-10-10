@@ -251,6 +251,22 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
+### Type Checking
+
+This gem includes RBS type signatures in the `sig/` directory. To validate the type signatures:
+
+```bash
+bundle exec rake rbs:validate
+```
+
+To run type checking with Steep:
+
+```bash
+bundle exec rake rbs:steep
+```
+
+The RBS validation is automatically run as part of the default rake task and CI workflow.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/andrewmcodes/huebrew. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/andrewmcodes/huebrew/blob/main/CODE_OF_CONDUCT.md).
