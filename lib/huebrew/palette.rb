@@ -33,7 +33,7 @@ module Huebrew
     # Semantic alias mapping
     SEMANTIC_ALIASES = {
       "neutral" => "slate",
-      "accent" => "violet",
+      "accent" => "blue",
       "success" => "grass",
       "warning" => "amber",
       "danger" => "red",
