@@ -72,8 +72,8 @@ module Huebrew
           color_pairs.each do |pair|
             output << "#{pair}:\\"
           end
-          # Remove trailing backslash from last line
-          output[-1] = output[-1].chomp(":\\")
+          # Remove trailing backslash from last line but keep the colon
+          output[-1] = output[-1].chomp("\\")
           output[-1] += "\""
 
           output.join("\n")
