@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+# Patch for Hash to add to_yaml method
+class Hash[unchecked out K, unchecked out V]
+  def to_yaml: () -> String
+end
+
+# Patch for String to allow to_i with base parameter
+class String
+  def to_i: (?Integer base) -> Integer
+end
