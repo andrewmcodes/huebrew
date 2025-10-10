@@ -1,0 +1,29 @@
+# Radix cyan color scale (light scheme) - info alt
+family: cyan
+scheme: light
+steps:
+  1: "#fafdfe"
+  2: "#f2fafb"
+  3: "#def7f9"
+  4: "#caf1f6"
+  5: "#b5e9f0"
+  6: "#9ddde7"
+  7: "#7dcedc"
+  8: "#3db9cf"
+  9: "#00a2c7"
+  10: "#0797b9"
+  11: "#107d98"
+  12: "#0d3c48"
+alpha_steps:
+  a1: "#0099cc05"
+  a2: "#009db10d"
+  a3: "#00c2d121"
+  a4: "#00bcd435"
+  a5: "#01b4cc4a"
+  a6: "#00a7c162"
+  a7: "#009fbb82"
+  a8: "#00a3c0c2"
+  a9: "#00a2c7"
+  a10: "#0797b9"
+  a11: "#107d98"
+  a12: "#0d3c48"

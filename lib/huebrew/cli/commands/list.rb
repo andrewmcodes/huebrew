@@ -50,11 +50,19 @@ module Huebrew
         end
 
         def list_variants
+          require_relative "../../variant"
+
+          variants = Huebrew::Variant.all
+
           puts "Available Variants:"
           puts "-" * 60
-          puts "  base - Base variant (default)"
-          puts "  dim - Dimmed variant"
-          puts "  high_contrast - High contrast variant"
+
+          variants.each do |variant|
+            puts "  #{variant.id}"
+            puts "    Name: #{variant.name}"
+            puts "    Rules: #{variant.rules.size} transformation(s)"
+            puts
+          end
         end
 
         def list_exporters

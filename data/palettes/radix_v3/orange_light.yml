@@ -1,0 +1,29 @@
+# Radix orange color scale (light scheme) - warning alt
+family: orange
+scheme: light
+steps:
+  1: "#fefcfb"
+  2: "#fff7ed"
+  3: "#ffefd6"
+  4: "#ffdfb5"
+  5: "#ffd19a"
+  6: "#ffc182"
+  7: "#f5ae73"
+  8: "#ec9455"
+  9: "#f76b15"
+  10: "#ef5f00"
+  11: "#cc4e00"
+  12: "#582d1d"
+alpha_steps:
+  a1: "#c0400004"
+  a2: "#ff8e0012"
+  a3: "#ff9c0029"
+  a4: "#ff91004a"
+  a5: "#ff8b0065"
+  a6: "#ff81007d"
+  a7: "#ed6c008c"
+  a8: "#e35f00aa"
+  a9: "#f76b15"
+  a10: "#ef5f00"
+  a11: "#cc4e00"
+  a12: "#582d1d"

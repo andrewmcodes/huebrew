@@ -59,6 +59,9 @@ module Huebrew
           case target
           when "fzf"
             Huebrew::Exporters::FZF::V1.new
+          when "tmux"
+            require_relative "../../exporters/tmux/v1"
+            Huebrew::Exporters::Tmux::V1.new
           end
         end
       end

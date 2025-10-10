@@ -6,6 +6,7 @@ require_relative "cli/commands/version"
 require_relative "cli/commands/list"
 require_relative "cli/commands/init"
 require_relative "cli/commands/preview"
+require_relative "cli/commands/build"
 require_relative "cli/commands/export"
 
 module Huebrew
@@ -18,6 +19,7 @@ module Huebrew
       register "list", List, aliases: ["ls"]
       register "init", Init
       register "preview", Preview
+      register "build", Build
       register "export", Export
     end
 

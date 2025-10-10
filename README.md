@@ -78,10 +78,38 @@ huebrew export fzf radix:slate:dark
 huebrew export fzf radix:slate:dark -o ~/.fzf_colors.sh
 ```
 
+Export a palette to tmux format:
+
+```bash
+# Export tmux configuration
+huebrew export tmux radix:violet:dark -o ~/.tmux-colors.conf
+
+# Source in your .tmux.conf
+# source-file ~/.tmux-colors.conf
+```
+
 Then source it in your shell:
 
 ```bash
 source ~/.fzf_colors.sh
+```
+
+### Build Themes
+
+Preview the resolved theme with all tokens:
+
+```bash
+# Build theme in YAML format
+huebrew build radix:slate:light
+
+# Build with variant
+huebrew build radix:slate:light --variant dim
+
+# Build in JSON format
+huebrew build radix:slate:light --format json
+
+# Show only specific family
+huebrew build radix:slate:light --family slate
 ```
 
 ## Configuration
@@ -109,7 +137,35 @@ export HUEBREW_DEFAULT_PALETTE="radix:violet:dark"
 export HUEBREW_ALPHA_MODE="flatten"
 ```
 
-## Color Model
+## Color Palettes
+
+### Radix v3 Palettes Included
+
+All palettes are available in both light and dark schemes:
+
+**Core Palettes:**
+- **Slate** (neutral) - Gray scale for UI
+- **Violet** (accent) - Purple for primary actions
+- **Blue** (info) - Blue for informational elements
+- **Cyan** (info alt) - Cyan for secondary info
+
+**Semantic Palettes:**
+- **Grass** (success) - Green for success states
+- **Amber** (warning) - Amber for warnings
+- **Orange** (warning alt) - Orange for secondary warnings
+- **Red** (danger) - Red for errors and destructive actions
+
+Total: **16 complete color palettes** (8 families × 2 schemes)
+
+### Variants
+
+Three built-in variant transformations:
+
+- **base** - Default colors (no transformation)
+- **dim** - Slightly dimmed colors for reduced contrast
+- **high_contrast** - Enhanced colors for better accessibility
+
+Use variants with the `--variant` flag in build and export commands.
 
 Huebrew uses a canonical RGBA color model:
 
@@ -167,6 +223,15 @@ Preview a color palette in the terminal with colored output.
 Options:
 - `--family` - Specify which family to preview
 
+### `huebrew build [palette_id]`
+
+Build and preview a theme with all resolved tokens.
+
+Options:
+- `--variant` - Apply variant transformation (base, dim, high_contrast)
+- `--format` - Output format (yaml, json)
+- `--family` - Show only tokens for specific family
+
 ### `huebrew export <target> [palette_id]`
 
 Export a palette to a specific format.
@@ -176,8 +241,9 @@ Options:
 - `-o, --output` - Output file path
 
 Available targets:
-- `fzf` - FZF color configuration
-- More targets coming soon (vscode, tmux, neovim, raycast)
+- `fzf` - FZF color configuration (string output)
+- `tmux` - tmux.conf color configuration (file output)
+- More targets coming soon (vscode, neovim, raycast)
 
 ## Development
 

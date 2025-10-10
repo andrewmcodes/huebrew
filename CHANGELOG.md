@@ -1,5 +1,19 @@
 ## [Unreleased]
 
+### Added
+- **Variant system**: Base, dim, and high_contrast variants with transformation rules
+- **Theme resolver**: Bridge between palette + variant for token resolution
+- **Build command**: Preview resolved themes with all tokens (YAML/JSON output)
+- **Tmux exporter**: Generate tmux.conf color configurations
+- **Template system**: ERB template rendering for file-based exporters
+- **8 additional Radix v3 families**: blue, cyan, amber, orange (16 total palettes)
+- **Semantic palette completeness**: All 8 families mapped (neutral, accent, success, warning, danger, info)
+
+### Changed
+- List variants now shows actual variant definitions with rule counts
+- Export command supports tmux target
+- Improved documentation with variant usage and expanded palette list
+
 ## [0.1.0] - 2025-10-10
 
 ### Added

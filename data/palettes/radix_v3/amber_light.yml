@@ -1,0 +1,29 @@
+# Radix amber color scale (light scheme) - warning
+family: amber
+scheme: light
+steps:
+  1: "#fefdfb"
+  2: "#fff9ed"
+  3: "#fff4d5"
+  4: "#ffecbc"
+  5: "#ffe3a2"
+  6: "#ffd386"
+  7: "#f3ba63"
+  8: "#ee9d2b"
+  9: "#ffb224"
+  10: "#ffa01c"
+  11: "#ad5700"
+  12: "#4e2009"
+alpha_steps:
+  a1: "#c0800004"
+  a2: "#f4d10012"
+  a3: "#ffde002a"
+  a4: "#ffd40043"
+  a5: "#ffd1005d"
+  a6: "#f8c40079"
+  a7: "#e2a8009c"
+  a8: "#da9600d4"
+  a9: "#ffb224"
+  a10: "#ffa01c"
+  a11: "#ad5700"
+  a12: "#4e2009"
