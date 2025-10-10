@@ -1,0 +1,29 @@
+# Radix blue color scale (light scheme) - info/primary
+family: blue
+scheme: light
+steps:
+  1: "#fbfdff"
+  2: "#f5faff"
+  3: "#edf6ff"
+  4: "#e1f0ff"
+  5: "#cee7fe"
+  6: "#b7d9f8"
+  7: "#96c7f2"
+  8: "#5eb0ef"
+  9: "#0091ff"
+  10: "#0081f1"
+  11: "#006adc"
+  12: "#00254d"
+alpha_steps:
+  a1: "#0080ff04"
+  a2: "#008cff0a"
+  a3: "#008ff312"
+  a4: "#009ffe1e"
+  a5: "#0093f931"
+  a6: "#0088f048"
+  a7: "#0083eb69"
+  a8: "#0084e6a1"
+  a9: "#0091ff"
+  a10: "#0081f1"
+  a11: "#006adc"
+  a12: "#00254d"
