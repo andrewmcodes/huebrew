@@ -1,4 +1,209 @@
 module Huebrew
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+  def self.configure: () { (untyped) -> void } -> void
+                    | () -> void
+
+  def self.config: () -> untyped
+
+  def self.registry: () -> Registry
+
+  class Error < StandardError
+  end
+
+  class ConfigError < Error
+  end
+
+  class SchemaError < Error
+  end
+
+  class NotFoundError < Error
+  end
+
+  class ContrastViolationError < Error
+  end
+
+  class ParseError < Error
+  end
+
+  class ExportError < Error
+  end
+
+  module Types
+  end
+
+  class Color
+    attr_reader r: Integer
+    attr_reader g: Integer
+    attr_reader b: Integer
+    attr_reader a: Float
+
+    def self.parse: (String hex) -> Color
+
+    def to_hex: (?include_alpha: bool) -> String
+
+    def to_rgba: () -> String
+
+    def with_alpha: (Float new_alpha) -> Color
+
+    def blend_over: (Color bg) -> Color
+
+    def relative_luminance: () -> Float
+
+    def contrast_ratio: (Color other) -> Float
+
+    def ensure_contrast: (Color bg, ?min_ratio: Float, ?strategy: Symbol) -> Color
+
+    def to_s: () -> String
+  end
+
+  class Palette
+    attr_reader id: String
+    attr_reader name: String
+    attr_reader scheme: String
+    attr_reader families: Hash[String, Hash[String, untyped]]
+
+    ROLE_STEP_MAP: Hash[String, Integer]
+    SEMANTIC_ALIASES: Hash[String, String]
+
+    def self.load_from_file: (String path) -> Palette
+
+    def color_for_role: (String family, String role, ?alpha: bool) -> Color?
+
+    def roles_for_family: (String family) -> Hash[String, Color]
+
+    def valid?: () -> bool
+  end
+
+  class Registry
+    def initialize: (?data_dirs: Array[String]?) -> void
+
+    def load_palettes!: () -> Hash[String, Palette]
+
+    def palette: (String id) -> Palette?
+
+    def palettes: () -> Array[Palette]
+
+    def find_palettes: (?family: String?, ?scheme: String?) -> Array[Palette]
+  end
+
+  class Variant
+    attr_reader id: String
+    attr_reader name: String
+    attr_reader rules: Array[Hash[Symbol, untyped]]
+
+    VARIANTS: Hash[String, Hash[Symbol, untyped]]
+
+    def self.get: (String id) -> Variant?
+
+    def self.all: () -> Array[Variant]
+
+    def apply: (Palette palette) -> Palette
+
+    def apply_rule: (Color color, Hash[Symbol, untyped] rule) -> Color
+  end
+
+  class Theme
+    attr_reader palette: Palette
+    attr_reader variant: Variant
+    attr_reader tokens: Hash[String, Color]
+
+    def initialize: (palette: Palette, ?variant: Variant?) -> void
+
+    def resolve_tokens: () -> Hash[String, Color]
+
+    def color: (String path) -> Color?
+
+    def tokens_for_family: (String family) -> Hash[String, Color]
+  end
+
+  class Config
+    def self.config: () -> untyped
+
+    def self.load_from_file: (String path) -> void
+
+    def self.load_from_env: () -> void
+
+    def self.initialize_config: () -> void
+  end
+
+  class Exporter
+    attr_reader id: String
+    attr_reader name: String
+    attr_reader output_kind: Symbol
+
+    def initialize: () -> void
+
+    def capabilities: () -> Hash[Symbol, bool]
+
+    def render: (palette: Palette, family: String, ?dest: String?) -> String?
+  end
+
+  module Renderers
+    class ErbRenderer
+      def self.render: (String template_path, ?Hash[Symbol | String, untyped] context) -> String
+
+      def self.find_template: (String name) -> String?
+
+      class BindingContext
+        def initialize: (?Hash[Symbol | String, untyped] context) -> void
+
+        def get_binding: () -> Binding
+      end
+    end
+  end
+
+  module CLI
+    class Command
+      def call: (**untyped) -> void
+    end
+
+    module Commands
+      class Version < Command
+        def call: (**untyped) -> void
+      end
+
+      class Init < Command
+        def call: (**untyped) -> void
+      end
+
+      class List < Command
+        def call: (**untyped) -> void
+      end
+
+      class Preview < Command
+        def call: (**untyped) -> void
+      end
+
+      class Build < Command
+        def call: (**untyped) -> void
+      end
+
+      class Export < Command
+        def call: (**untyped) -> void
+      end
+    end
+  end
+
+  module Exporters
+    module FZF
+      class V1 < Exporter
+        def capabilities: () -> Hash[Symbol, bool]
+
+        def render: (palette: Palette, family: String, ?dest: String?) -> String
+
+        def output_kind: () -> Symbol
+      end
+    end
+
+    module Tmux
+      class V1 < Exporter
+        def capabilities: () -> Hash[Symbol, bool]
+
+        def render: (palette: Palette, family: String, ?dest: String?) -> String
+
+        def output_kind: () -> Symbol
+      end
+    end
+  end
 end
