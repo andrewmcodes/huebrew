@@ -251,6 +251,32 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
+### Running the CLI Locally
+
+To run the CLI locally without installing the gem, use:
+
+```bash
+bundle exec exe/huebrew [command]
+```
+
+Examples:
+
+```bash
+# Display version
+bundle exec exe/huebrew version
+
+# Show available commands
+bundle exec exe/huebrew --help
+
+# Preview a palette
+bundle exec exe/huebrew preview radix:slate:light
+
+# Export to FZF
+bundle exec exe/huebrew export fzf radix:violet:dark
+```
+
+This allows you to test changes to the CLI without repeatedly reinstalling the gem.
+
 ### Type Checking
 
 This gem includes RBS type signatures in the `sig/` directory. To validate the type signatures:
