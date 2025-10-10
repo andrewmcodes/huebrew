@@ -5,6 +5,8 @@ require_relative "huebrew/errors"
 require_relative "huebrew/types"
 require_relative "huebrew/config"
 require_relative "huebrew/color"
+require_relative "huebrew/palette"
+require_relative "huebrew/registry"
 
 module Huebrew
   # Configure Huebrew
@@ -17,6 +19,11 @@ module Huebrew
   # Get current configuration
   def self.config
     Config.config
+  end
+
+  # Get global registry instance
+  def self.registry
+    @registry ||= Registry.new
   end
 end
 
