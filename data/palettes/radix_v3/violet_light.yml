@@ -1,0 +1,29 @@
+# Radix violet color scale (light scheme)
+family: violet
+scheme: light
+steps:
+  1: "#fdfcfe"
+  2: "#fbfaff"
+  3: "#f5f2ff"
+  4: "#ede9fe"
+  5: "#e4defc"
+  6: "#d7cff9"
+  7: "#c4b8f3"
+  8: "#aa99ec"
+  9: "#6e56cf"
+  10: "#654dc4"
+  11: "#6550b9"
+  12: "#2f265f"
+alpha_steps:
+  a1: "#5500aa03"
+  a2: "#4400ff05"
+  a3: "#4400ff0d"
+  a4: "#4000fe16"
+  a5: "#3600f021"
+  a6: "#3100e930"
+  a7: "#2d00db47"
+  a8: "#2b00d066"
+  a9: "#2400b7a9"
+  a10: "#2300abb2"
+  a11: "#1f0099af"
+  a12: "#0b0043d0"

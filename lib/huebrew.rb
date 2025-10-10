@@ -7,6 +7,7 @@ require_relative "huebrew/config"
 require_relative "huebrew/color"
 require_relative "huebrew/palette"
 require_relative "huebrew/registry"
+require_relative "huebrew/exporter"
 
 module Huebrew
   # Configure Huebrew
