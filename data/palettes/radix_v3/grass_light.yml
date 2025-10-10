@@ -1,0 +1,29 @@
+# Radix grass color scale (light scheme) - success/green
+family: grass
+scheme: light
+steps:
+  1: "#fbfefb"
+  2: "#f3fcf3"
+  3: "#ebf9eb"
+  4: "#dff3df"
+  5: "#ceebcf"
+  6: "#b7dfba"
+  7: "#97cf9c"
+  8: "#65ba74"
+  9: "#46a758"
+  10: "#3e9b4f"
+  11: "#297c3b"
+  12: "#1b311e"
+alpha_steps:
+  a1: "#00c00004"
+  a2: "#00a3000c"
+  a3: "#00970014"
+  a4: "#009f0020"
+  a5: "#00930531"
+  a6: "#008f0848"
+  a7: "#018b0f68"
+  a8: "#00800b9a"
+  a9: "#008619b9"
+  a10: "#007b17c1"
+  a11: "#006514d8"
+  a12: "#002006e4"

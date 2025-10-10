@@ -1,0 +1,29 @@
+# Radix red color scale (dark scheme) - danger/error
+family: red
+scheme: dark
+steps:
+  1: "#191111"
+  2: "#201314"
+  3: "#3b1219"
+  4: "#500f1c"
+  5: "#611a1f"
+  6: "#742424"
+  7: "#8e3033"
+  8: "#b0414a"
+  9: "#e54d2e"
+  10: "#ec6142"
+  11: "#ff9592"
+  12: "#ffd1d9"
+alpha_steps:
+  a1: "#f4121209"
+  a2: "#f22f3e11"
+  a3: "#ff173f2d"
+  a4: "#fe0a3b44"
+  a5: "#ff204756"
+  a6: "#ff3e5668"
+  a7: "#ff536184"
+  a8: "#ff5d61a8"
+  a9: "#fe6d4ee4"
+  a10: "#ff7d59eb"
+  a11: "#ff9592"
+  a12: "#ffd1d9"
