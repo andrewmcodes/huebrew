@@ -10,7 +10,7 @@ module Huebrew
       class Export < Command
         desc "Export a palette to a specific format"
 
-        argument :target, type: :string, required: true, desc: "Export target (fzf, eza, vscode, tmux, neovim, raycast)"
+        argument :target, type: :string, required: true, desc: "Export target (fzf, eza, vscode, tmux, neovim, raycast, zsh-syntax-highlighting)"
         argument :palette_id, type: :string, required: false, desc: "Palette ID (e.g., radix:slate:light)"
 
         option :family, type: :string, desc: "Family to export (defaults to first family)"
@@ -65,6 +65,9 @@ module Huebrew
           when "tmux"
             require_relative "../../exporters/tmux/v1"
             Huebrew::Exporters::Tmux::V1.new
+          when "zsh-syntax-highlighting"
+            require_relative "../../exporters/zsh_syntax_highlighting/v1"
+            Huebrew::Exporters::ZshSyntaxHighlighting::V1.new
           end
         end
       end
