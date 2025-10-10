@@ -137,6 +137,8 @@ module Huebrew
     def capabilities: () -> Hash[Symbol, bool]
 
     def render: (palette: Palette, family: String, ?dest: String?) -> String?
+
+    def format_color: (Color color, ?bg: Color?) -> String
   end
 
   module Renderers
