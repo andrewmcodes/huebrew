@@ -88,6 +88,16 @@ huebrew export tmux radix:violet:dark -o ~/.tmux-colors.conf
 # source-file ~/.tmux-colors.conf
 ```
 
+Export a palette to Eza format:
+
+```bash
+# Export Eza colors to stdout
+huebrew export eza radix:slate:dark
+
+# Export to file
+huebrew export eza radix:slate:dark -o ~/.eza_colors.sh
+```
+
 Then source it in your shell:
 
 ```bash
@@ -242,6 +252,7 @@ Options:
 
 Available targets:
 - `fzf` - FZF color configuration (string output)
+- `eza` - Eza color configuration (string output)
 - `tmux` - tmux.conf color configuration (file output)
 - More targets coming soon (vscode, neovim, raycast)
 

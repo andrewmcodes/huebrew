@@ -10,7 +10,7 @@ module Huebrew
       class Export < Command
         desc "Export a palette to a specific format"
 
-        argument :target, type: :string, required: true, desc: "Export target (fzf, vscode, tmux, neovim, raycast)"
+        argument :target, type: :string, required: true, desc: "Export target (fzf, eza, vscode, tmux, neovim, raycast)"
         argument :palette_id, type: :string, required: false, desc: "Palette ID (e.g., radix:slate:light)"
 
         option :family, type: :string, desc: "Family to export (defaults to first family)"
@@ -59,6 +59,9 @@ module Huebrew
           case target
           when "fzf"
             Huebrew::Exporters::FZF::V1.new
+          when "eza"
+            require_relative "../../exporters/eza/v1"
+            Huebrew::Exporters::Eza::V1.new
           when "tmux"
             require_relative "../../exporters/tmux/v1"
             Huebrew::Exporters::Tmux::V1.new
