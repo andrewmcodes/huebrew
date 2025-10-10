@@ -27,6 +27,17 @@ namespace :rbs do
     puts "✗ RBS validation failed: #{e.message}"
     exit 1
   end
+
+  desc "Run Steep type checker"
+  task :steep do
+    sh "bundle exec steep check --severity-level=error" do |ok, _res|
+      unless ok
+        puts "✗ Steep type checking failed"
+        exit 1
+      end
+    end
+    puts "✓ Steep type checking passed"
+  end
 end
 
 task default: %i[spec standard rbs:validate]

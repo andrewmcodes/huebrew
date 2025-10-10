@@ -259,6 +259,12 @@ This gem includes RBS type signatures in the `sig/` directory. To validate the t
 bundle exec rake rbs:validate
 ```
 
+To run type checking with Steep:
+
+```bash
+bundle exec rake rbs:steep
+```
+
 The RBS validation is automatically run as part of the default rake task and CI workflow.
 
 ## Contributing
